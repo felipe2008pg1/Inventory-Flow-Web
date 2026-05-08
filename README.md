@@ -1,3 +1,4 @@
+**This project is available in Portuguese and English versions. 🇧🇷 🇺🇸**
 # Inventory-Flow-Web
 🇧🇷 _Sistema de gestão de inventário focado na transição de lógica CLI para Web. Demonstra a aplicação de conceitos de back-end (CRUD e persistência de dados) em uma interface funcional com JavaScript e LocalStorage. Desenvolvido por Felipe Gonzalez para portfólio técnico._
 
