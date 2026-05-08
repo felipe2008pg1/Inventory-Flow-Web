@@ -1,2 +1,6 @@
 # Inventory-Flow-Web
-🇧🇷 Sistema de gestão de inventário focado na transição de lógica CLI para Web. Demonstra a aplicação de conceitos de back-end (CRUD e persistência de dados) em uma interface funcional com JavaScript e LocalStorage. Desenvolvido por Felipe de la Vega para portfólio técnico.
+🇧🇷 _Sistema de gestão de inventário focado na transição de lógica CLI para Web. Demonstra a aplicação de conceitos de back-end (CRUD e persistência de dados) em uma interface funcional com JavaScript e LocalStorage. Desenvolvido por Felipe de la Vega para portfólio técnico._
+
+--
+
+🇺🇸 Inventory management system focused on transitioning from CLI logic to web-based development. Demonstrating the application of back-end concepts (CRUD and data persistence) in a functional interface using JavaScript and LocalStorage. Developed by Felipe de la Vega for a technical portfolio.
