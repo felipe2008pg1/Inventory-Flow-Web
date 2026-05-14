@@ -43,8 +43,6 @@ function removerProduto(index) {
         atualizarTela();
     }
 }
-
-// Mostrar a hora como no seu tools.mostrar_hora()
 function atualizarHora() {
     const agora = new Date();
     document.getElementById('data-hora').innerText = `🕐 | Data: ${agora.toLocaleString('pt-BR')}`;
