@@ -1,1 +1,52 @@
-.
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Estoque | @dlv.gonzalezz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>📊 GERENCIAMENTO DE ESTOQUE</h1>
+            <p id="data-hora"></p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>Adicionar Produto</h2>
+                <div class="form-group">
+                    <input type="text" id="produto-nome" placeholder="Nome do Produto">
+                    <input type="number" id="produto-preco" placeholder="Preço (R$)">
+                    <button onclick="adicionarProduto()" class="btn-add">Adicionar</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Itens no Estoque</h2>
+                <table id="tabela-estoque">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela">
+                        </tbody>
+                </table>
+                <div id="mensagem-vazio" class="hidden">O estoque está vazio!</div>
+            </section>
+        </main>
+
+        <footer>
+            <p>By @dlv.gonzalezz | 2026</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
