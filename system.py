@@ -1,6 +1,6 @@
-import datos
-import tools as to
-from backend import datos, tools
+import time
+from backend import datos
+from backend import tools as to
 
 to.carregar_dados()
 to.limpar_tela()
