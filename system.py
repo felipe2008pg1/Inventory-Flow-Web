@@ -2,45 +2,45 @@ import time
 from backend import datos
 from backend import tools as to
 
-to.carregar_dados()
-to.limpar_tela()
+to.load_data()
+to.clear_screen()
 
-to.escrever_menu("\n📊 GERENCIAMENTO DE ESTOQUE 📊 ", pular_linha=False)
+to.write_menu("\n📊 INVENTORY MANAGEMENT 📊 ", skip_line=False)
 time.sleep(0.4)
-to.escrever_menu("- By @dlv.gonzalezz")
+to.write_menu("- By @dlv.gonzalezz")
 
 while True:
 
-    to.limpar_tela()
+    to.clear_screen()
 
     try:
-        print(f"\n🕐 | Data: {to.mostrar_hora()}")
+        print(f"\n🕐 | Date: {to.show_time()}")
 
-        menu = int(input("\n1 - Ver estoque \n2 - Adicionar produto \n3 - Remover item \n4 - Sair \n ESCOLHA: ").strip())
-        
+        menu = int(input("\n1 - View stock \n2 - Add product \n3 - Remove item \n4 - Exit \n CHOOSE: ").strip())
+
         if menu == 1:
-            to.mostrar_estoque()
-            input("\nPressione ENTER para voltar.")
+            to.show_inventory()
+            input("\nPress ENTER to go back.")
 
         elif menu == 2:
-            produto = input("Nome do produto: ").strip().upper()
-            preco = float(input("Preço: ").strip())
-            to.adicionar_estoque(produto, preco)
+            product = input("Product name: ").strip().upper()
+            price = float(input("Price: ").strip())
+            to.add_inventory(product, price)
             time.sleep(1)
 
         elif menu == 3:
-            to.mostrar_estoque() 
-            to.remover_do_estoque()
+            to.show_inventory()
+            to.remove_from_inventory()
             time.sleep(1)
 
         elif menu == 4:
-            to.encerramento()
+            to.shutdown()
             break
 
         else:
-            print("Opção inválida! Escolha entre 1 e 4.")
+            print("Invalid option! Choose between 1 and 4.")
             time.sleep(2)
-            
+
     except ValueError:
-        print("\n[⚠️] ERRO Digite apenas números inteiros para as opções do menu. [⚠️]")
+        print("\n[⚠️] ERROR: Enter only integer numbers for menu options. [⚠️]")
         time.sleep(2)
