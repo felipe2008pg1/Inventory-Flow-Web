@@ -1,9 +1,9 @@
-ARQUIVO = "estoque.json"
+FILE = "inventory.json"
 
-estoque = []
+stock = []
 
-dados_autorizados = [
-    {'adm': "GAFA", 'senha': 135},
-    {'adm': "FELPS", 'senha': 235},
-    {'adm': "PAULO", 'senha': 123},
+authorized_data = [
+    {'admin': "GAFA", 'password': 135},
+    {'admin': "FELPS", 'password': 235},
+    {'admin': "PAULO", 'password': 123},
 ]
