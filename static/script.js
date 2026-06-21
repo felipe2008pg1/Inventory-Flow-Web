@@ -1,52 +1,53 @@
-let estoque = JSON.parse(localStorage.getItem('estoque')) || [];
+let stock = JSON.parse(localStorage.getItem('stock')) || [];
 
-function atualizarTela() {
-    const corpoTabela = document.getElementById('corpo-tabela');
-    const msgVazio = document.getElementById('mensagem-vazio');
-    corpoTabela.innerHTML = '';
+function updateScreen() {
+    const tableBody = document.getElementById('table-body');
+    const emptyMessage = document.getElementById('empty-message');
+    tableBody.innerHTML = '';
 
-    if (estoque.length === 0) {
-        msgVazio.classList.remove('hidden');
+    if (stock.length === 0) {
+        emptyMessage.classList.remove('hidden');
     } else {
-        msgVazio.classList.add('hidden');
-        estoque.forEach((item, index) => {
-            corpoTabela.innerHTML += `
+        emptyMessage.classList.add('hidden');
+        stock.forEach((item, index) => {
+            tableBody.innerHTML += `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${item.produto}</td>
-                    <td>R$ ${parseFloat(item.preco).toFixed(2)}</td>
-                    <td><button class="btn-remover" onclick="removerProduto(${index})">Remover</button></td>
+                    <td>${item.product}</td>
+                    <td>R$ ${parseFloat(item.price).toFixed(2)}</td>
+                    <td><button class="btn-remove" onclick="removeProduct(${index})">Remove</button></td>
                 </tr>
             `;
         });
     }
-    localStorage.setItem('estoque', JSON.stringify(estoque));
+    localStorage.setItem('stock', JSON.stringify(stock));
 }
 
-function adicionarProduto() {
-    const nome = document.getElementById('produto-nome').value.toUpperCase();
-    const preco = document.getElementById('produto-preco').value;
+function addProduct() {
+    const name = document.getElementById('product-name').value.toUpperCase();
+    const price = document.getElementById('product-price').value;
 
-    if (nome && preco) {
-        estoque.push({ produto: nome, preco: preco });
-        document.getElementById('produto-nome').value = '';
-        document.getElementById('produto-preco').value = '';
-        atualizarTela();
+    if (name && price) {
+        stock.push({ product: name, price: price });
+        document.getElementById('product-name').value = '';
+        document.getElementById('product-price').value = '';
+        updateScreen();
     } else {
-        alert("Preencha todos os campos!");
+        alert("Fill in all fields!");
     }
 }
 
-function removerProduto(index) {
-    if (confirm(`Remover ${estoque[index].produto}?`)) {
-        estoque.splice(index, 1);
-        atualizarTela();
+function removeProduct(index) {
+    if (confirm(`Remove ${stock[index].product}?`)) {
+        stock.splice(index, 1);
+        updateScreen();
     }
 }
-function atualizarHora() {
-    const agora = new Date();
-    document.getElementById('data-hora').innerText = `🕐 | Data: ${agora.toLocaleString('pt-BR')}`;
+
+function updateTime() {
+    const now = new Date();
+    document.getElementById('date-time').innerText = `🕐 | Date: ${now.toLocaleString('en-US')}`;
 }
 
-setInterval(atualizarHora, 1000);
-atualizarTela();
+setInterval(updateTime, 1000);
+updateScreen();
