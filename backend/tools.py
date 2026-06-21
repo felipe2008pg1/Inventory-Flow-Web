@@ -1,107 +1,103 @@
 import os
 from datetime import datetime
-import datos as da
+import data as da
 import time
 import json
 
-def salvar_dados():
+def save_data():
     try:
-        with open(da.ARQUIVO, "w", encoding="utf-8") as f:
-            # Salvamos a lista que está lá no datos.py
-            json.dump(da.estoque, f, indent=4, ensure_ascii=False)
+        with open(da.FILE, "w", encoding="utf-8") as f:
+            json.dump(da.stock, f, indent=4, ensure_ascii=False)
     except Exception as e:
-        print(f"Erro ao salvar: {e}")
+        print(f"Error saving: {e}")
 
-def carregar_dados():
-    if os.path.exists(da.ARQUIVO):
+def load_data():
+    if os.path.exists(da.FILE):
         try:
-            with open(da.ARQUIVO, "r", encoding="utf-8") as f:
-                # Atualizamos a lista no datos.py com o que está no arquivo
-                da.estoque = json.load(f)
+            with open(da.FILE, "r", encoding="utf-8") as f:
+                da.stock = json.load(f)
         except Exception as e:
-            print(f"Erro ao carregar: {e}")
+            print(f"Error loading: {e}")
 
-def mostrar_estoque():
-    if len(da.estoque) == 0:
-        escrever_lento("O estoque está vázio!")
-        print('='*10)
-        input("Digite ENTER para voltar: ").strip()
+def show_stock():
+    if len(da.stock) == 0:
+        write_slow("Stock is empty!")
+        print('=' * 10)
+        input("Press ENTER to go back: ").strip()
     else:
-        for i, t in enumerate(da.estoque,start=1):
-            print(f"{i} - {t['produto']:<14} | R${t['preco']}")
+        for i, t in enumerate(da.stock, start=1):
+            print(f"{i} - {t['product']:<14} | ${t['price']}")
 
-def limpar_tela():
+def clear_screen():
     os.system('cls' if os.name == 'nt' else "clear")
 
-def mostrar_hora():
-    agora = datetime.now()
-    br = agora.strftime("%d/%m/%Y - %H:%M:%S")
+def show_time():
+    now = datetime.now()
+    br = now.strftime("%d/%m/%Y - %H:%M:%S")
     return br
 
-def adicionar_estoque(produto, preco):
-    da.estoque.append({'produto': produto, 'preco': preco})
-    print(f"Produto {produto} adicionado com sucesso!")
-    salvar_dados()
+def add_stock(product, price):
+    da.stock.append({'product': product, 'price': price})
+    print(f"Product {product} added successfully!")
+    save_data()
 
-def remover_do_estoque():
-        if len(da.estoque) == 0:
-            escrever_lento("O estoque está vázio!")
-            print('\n='*10)
-        else:
-            for c, i in enumerate(da.estoque,start=1):
-                print(f"{c} - {i['produto']} | {i['preco']}")
-            remover = int(input("Digite o índice do produto: ")) - 1
-            removido = da.estoque[remover]['produto']
-            da.estoque.pop(remover)
-            escrever_lento(f"Produto {removido} removido com sucesso.")
-            salvar_dados()
+def remove_from_stock():
+    if len(da.stock) == 0:
+        write_slow("Stock is empty!")
+        print('\n=' * 10)
+    else:
+        for c, i in enumerate(da.stock, start=1):
+            print(f"{c} - {i['product']} | {i['price']}")
+        remove = int(input("Enter product index: ")) - 1
+        removed = da.stock[remove]['product']
+        da.stock.pop(remove)
+        write_slow(f"Product {removed} removed successfully.")
+        save_data()
 
-def escrever_menu(texto, pular_linha=True):
-    for letra in texto:
-        print(letra, end='', flush=True)
+def write_menu(text, new_line=True):
+    for letter in text:
+        print(letter, end='', flush=True)
         time.sleep(0.05)
-    
-    if pular_linha:
+
+    if new_line:
         print()
 
-def escrever_lento(a):
-    for letra in a:
-        print(letra, end='', flush=True)
+def write_slow(text):
+    for letter in text:
+        print(letter, end='', flush=True)
         time.sleep(0.05)
     print()
 
-def encerramento():
-    print("="*12)
-    escrever_lento(">> ENCERRANDO <<")
-    print("="*12)
+def shutdown():
+    print("=" * 12)
+    write_slow(">> SHUTTING DOWN <<")
+    print("=" * 12)
 
-def verificar_adm():
+def verify_admin():
 
-    tentativas = 0
+    attempts = 0
 
     while True:
         try:
-            name_adm = input("Digite seu user adm: ").strip().upper()
-            senha_adm = int(input("").strip())
-            encontrado = False
+            admin_name = input("Enter admin user: ").strip().upper()
+            admin_password = int(input("").strip())
+            found = False
 
-            for p in da.dados_autorizados:
-                if name_adm == p['adm'] and senha_adm == p['senha']:
-                    encontrado = True
-                    print('Administrador encontrado.')
-                    escrever_lento("CARREGANDO...")
+            for p in da.authorized_data:
+                if admin_name == p['admin'] and admin_password == p['password']:
+                    found = True
+                    print('Admin found.')
+                    write_slow("LOADING...")
                     time.sleep(1)
 
-            if not encontrado:
-                tentativas += 1 
-                print("Administrador não encontrado ou dados incorretos")
-                escrever_lento(f"Tentativa {tentativas}/3.")
-                print("- Reiniciando.. -")
+            if not found:
+                attempts += 1
+                print("Admin not found or incorrect data")
+                write_slow(f"Attempt {attempts}/3.")
+                print("- Restarting.. -")
                 time.sleep(0.3)
-                limpar_tela()
+                clear_screen()
 
         except ValueError:
-            print("Digite números quanto solicitado")
+            print("Enter numbers when required")
             continue
-
-    
